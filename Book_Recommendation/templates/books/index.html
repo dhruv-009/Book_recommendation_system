@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+        <style>
+            .main{
+                background-color:white;
+                border-radius: 10px;
+                font-size: large;
+                font-weight: bolder;
+                padding-top: 10px;
+            }
+    
+            body{
+                background-color: palegoldenrod;
+            }
+        </style>
+</head>
+
+<body>
+    <div class="container my-4">
+        <h2 style="display: flex;align-items: center;justify-content: center;font-weight: 1000;color: black;">Book
+            Recommendations</h2>
+        <div class="container my-4">
+            <form method="POST" action="/">
+                {% csrf_token %}
+                <input required list="datalistmovie" type="text" name='search' placeholder="Enter Book Name"
+                    class="form-control col-sm-10 d-inline" style="border: 2px solid black;" id="search"
+                    value="{{bsearch}}">
+                <button type="submit" style="border: 2px solid black;" class="btn btn-success my-3">Recommend</button>
+                <datalist id="datalistmovie">
+                    {% for bl in bname %}
+                    <option value="{{bl}}">
+                        {% endfor %}
+                </datalist>
+            </form>
+        </div>
+        <div class="container">
+            <div class="row">
+                {% for book in books %}
+                <div class="col-sm-4">
+                    <div class="card" style="width: 18rem;">
+                        <!-- <img src="..." class="card-img-top" alt="..."> -->
+                        <div class="card-body">
+                            <h5 class="card-title">{{book.title}}</h5>
+                            <p class="card-text">authors: {{book.authors}}<br> avg_rating :{{book.average_rating}}<br> lang: {{book.language_code}} <br> pub_date: {{book.publication_date}}<br> publisher: {{book.publisher}}  </p>
+                            <!-- To get any other features like num_pages etc. Use {{book.num_pages}}  -->
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+</body>
+
+</html>
