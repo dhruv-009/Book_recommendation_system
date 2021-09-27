@@ -1,1 +1,1 @@
-web: gunicorn etp.wsgi:application --log-file -
+web: gunicorn Book_Recommendation.wsgi:application --log-file -
